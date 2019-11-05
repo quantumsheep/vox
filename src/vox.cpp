@@ -5,7 +5,7 @@ static void glfw_error_callback(int error, const char *description)
     fprintf(stderr, "GLFW error %d: %s\n", error, description);
 }
 
-Vox::Environment *Vox::Init(int width, int height, const char *title, bool debug, std::size_t antialiasing, Vox::Monitor *monitor, Vox::Window *share)
+std::unique_ptr<Vox::Environment> Vox::Init(int width, int height, const char *title, bool debug, std::size_t antialiasing, Vox::Monitor *monitor, Vox::Window *share)
 {
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
@@ -39,6 +39,11 @@ Vox::Environment *Vox::Init(int width, int height, const char *title, bool debug
         return nullptr;
     }
 
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
+    glDisable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO &io = ImGui::GetIO();
@@ -48,5 +53,5 @@ Vox::Environment *Vox::Init(int width, int height, const char *title, bool debug
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 410");
 
-    return new Vox::Environment(window, io);
+    return std::unique_ptr<Vox::Environment>(new Vox::Environment(window, io));
 }

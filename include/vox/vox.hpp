@@ -10,8 +10,9 @@
 #include <vox/ui/window.hpp>
 
 #include <cstdio>
+#include <memory>
 
 namespace Vox
 {
-Vox::Environment *Init(int width, int height, const char *title, bool debug = false, std::size_t antialiasing = 4, Vox::Monitor *monitor = nullptr, Vox::Window *share = nullptr);
+std::unique_ptr<Vox::Environment> Init(int width, int height, const char *title, bool debug = false, std::size_t antialiasing = 4, Vox::Monitor *monitor = nullptr, Vox::Window *share = nullptr);
 } // namespace Vox
