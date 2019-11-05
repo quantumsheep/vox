@@ -2,7 +2,7 @@
 
 int main()
 {
-    Vox::Environment *env = Vox::Init(1280, 720, "First Person Camera", true);
+    std::unique_ptr<Vox::Environment> env = Vox::Init(1280, 720, "First Person Camera", true);
     if (env == nullptr)
         return 1;
 
@@ -19,7 +19,7 @@ int main()
 
         glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
         glClear(GL_COLOR_BUFFER_BIT);
-        
+
         Vox::UI::Draw();
 
         env->swap_buffers();
