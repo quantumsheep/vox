@@ -33,9 +33,10 @@ std::unique_ptr<Vox::Environment> Vox::Init(int width, int height, const char *t
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
 
-    if (gladLoadGL() == 0)
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         fprintf(stderr, "Failed to load GLAD!\n");
+        glfwTerminate();
         return nullptr;
     }
 
