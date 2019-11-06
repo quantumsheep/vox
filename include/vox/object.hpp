@@ -26,5 +26,6 @@ public:
            glm::vec3 scale = glm::vec3(1.0f));
 
     virtual glm::mat4 model();
+    virtual void draw();
 };
 } // namespace Vox

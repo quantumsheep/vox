@@ -47,3 +47,9 @@ Vox::Object::Object(std::vector<Vertex> vertices_, glm::vec3 position_, glm::vec
 
     glBindVertexArray(0);
 }
+
+void Vox::Object::draw()
+{
+    glBindVertexArray(this->vao);
+    glDrawArrays(GL_TRIANGLES, 0, this->vertices.size());
+}
