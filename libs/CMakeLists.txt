@@ -1,9 +1,12 @@
 add_subdirectory(glfw)
 add_subdirectory(glad)
+add_subdirectory(glm)
 
 set(DEPENDENCIES_HEADERS_FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/imgui"
     "${CMAKE_CURRENT_SOURCE_DIR}/imgui-impl"
+
+    "${CMAKE_CURRENT_SOURCE_DIR}/glm"
 
     PARENT_SCOPE
 )
