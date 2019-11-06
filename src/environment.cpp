@@ -10,13 +10,10 @@ bool Vox::Environment::next_frame()
     return true;
 }
 
-void Vox::Environment::update_viewport() const
+void Vox::Environment::update_viewport()
 {
-    int display_w = 0;
-    int display_h = 0;
-
-    glfwGetFramebufferSize(this->window, &display_w, &display_h);
-    glViewport(0, 0, display_w, display_h);
+    glfwGetFramebufferSize(this->window, &this->width, &this->height);
+    glViewport(0, 0, this->width, this->height);
 }
 
 void Vox::Environment::swap_buffers() const

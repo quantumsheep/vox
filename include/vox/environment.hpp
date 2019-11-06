@@ -11,6 +11,9 @@ public:
     Vox::Window *window = nullptr;
     Vox::UI::IO &ui_io;
 
+    int width = 0;
+    int height = 0;
+
     ~Environment()
     {
         ImGui_ImplOpenGL3_Shutdown();
@@ -21,7 +24,10 @@ public:
         glfwTerminate();
     }
 
-    Environment(Vox::Window *window_, Vox::UI::IO &ui_io_) : window(window_), ui_io(ui_io_) {}
+    Environment(Vox::Window *window_, Vox::UI::IO &ui_io_) : window(window_), ui_io(ui_io_)
+    {
+        this->update_viewport();
+    }
 
     inline bool window_should_close() const
     {
@@ -29,7 +35,7 @@ public:
     }
 
     bool next_frame();
-    void update_viewport() const;
+    void update_viewport();
     void swap_buffers() const;
 };
 } // namespace Vox
