@@ -20,10 +20,10 @@ public:
     unsigned int vao;
     unsigned int ebo;
 
-    Object(std::vector<Vertex> vertices_,
-           glm::vec3 position_ = glm::vec3(0.0f),
-           glm::vec3 rotation_ = glm::vec3(0.0f),
-           glm::vec3 scale_ = glm::vec3(1.0f));
+    Object(std::vector<Vertex> vertices,
+           glm::vec3 position = glm::vec3(0.0f),
+           glm::vec3 rotation = glm::vec3(0.0f),
+           glm::vec3 scale = glm::vec3(1.0f));
 
     virtual glm::mat4 model();
 };
