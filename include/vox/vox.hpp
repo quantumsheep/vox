@@ -9,6 +9,8 @@
 
 #include <vox/ui/window.hpp>
 
+#include <vox/log.hpp>
+
 #include <cstdio>
 #include <memory>
 
