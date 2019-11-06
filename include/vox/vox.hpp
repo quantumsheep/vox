@@ -10,6 +10,7 @@
 #include <vox/ui/window.hpp>
 
 #include <vox/log.hpp>
+#include <vox/shader.hpp>
 
 #include <cstdio>
 #include <memory>
