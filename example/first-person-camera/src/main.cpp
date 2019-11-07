@@ -15,7 +15,7 @@ int main()
 
         Vox::UI::NewFrame();
 
-        Vox::UI::Window::Create("Debug", [&] {
+        Vox::UI::Window("Debug", [&] {
             Vox::UI::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / env->ui_io.Framerate, env->ui_io.Framerate);
 
             Vox::UI::Separator();
@@ -71,8 +71,17 @@ int main()
         };
 
         static Vox::Object cube(vertices);
+        static Vox::Object original = cube;
 
-        Vox::UI::Window::Create("Cube Control", [&] {
+        Vox::UI::Window("Cube Control", ImGuiWindowFlags_MenuBar, [&] {
+            Vox::UI::MenuBar([&] {
+                Vox::UI::Menu("Tools", [&] {
+                    Vox::UI::MenuItem("Reset", "Ctrl+R", [&] {
+                        cube = original;
+                    });
+                });
+            });
+
             Vox::UI::Text("Position");
             Vox::UI::DragFloat("pos x", &cube.position.x, 0.01f);
             Vox::UI::DragFloat("pos y", &cube.position.y, 0.01f);
@@ -95,7 +104,7 @@ int main()
 
         static Vox::Camera camera((float)env->width, (float)env->height, glm::vec3(0.0f, 0.0f, -10.0f));
 
-        Vox::UI::Window::Create("Camera Control", [&] {
+        Vox::UI::Window("Camera Control", [&] {
             Vox::UI::Text("Position");
             Vox::UI::DragFloat("pos x", &camera.position.x, 0.01f);
             Vox::UI::DragFloat("pos y", &camera.position.y, 0.01f);
