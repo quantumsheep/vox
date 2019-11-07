@@ -2,12 +2,12 @@
 
 glm::mat4 Vox::Camera::view() const
 {
-    glm::vec3 front(
-        cos(glm::radians(this->rotation.y)) * cos(glm::radians(this->rotation.x + 90.0f)),
-        sin(glm::radians(this->rotation.y)),
-        cos(glm::radians(this->rotation.y)) * sin(glm::radians(this->rotation.x + 90.0f)));
+    glm::mat4 model(1.0f);
+    model = glm::rotate(model, glm::radians(this->rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+    model = glm::rotate(model, glm::radians(this->rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+    model = glm::rotate(model, glm::radians(this->rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 
-    return glm::lookAt(this->position, this->position + glm::normalize(front), glm::vec3(0.0f, 1.0f, 0.0f));
+    return model * glm::translate(glm::mat4(1.0f), this->position);
 }
 
 glm::mat4 Vox::Camera::projection() const
