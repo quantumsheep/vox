@@ -7,6 +7,7 @@
 
 #include <vox/ui/bindings.hpp>
 
+#include <vox/ui/menu.hpp>
 #include <vox/ui/window.hpp>
 
 #include <vox/camera.hpp>
