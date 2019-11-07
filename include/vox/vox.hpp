@@ -11,6 +11,8 @@
 #include <vox/ui/window.hpp>
 
 #include <vox/camera.hpp>
+#include <vox/cursor.hpp>
+#include <vox/keyboard.hpp>
 #include <vox/log.hpp>
 #include <vox/object.hpp>
 #include <vox/shader.hpp>
