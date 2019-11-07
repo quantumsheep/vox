@@ -4,17 +4,19 @@
 
 namespace Vox::UI
 {
-class Window
+template <typename Function>
+void Window(const char *name, ImGuiWindowFlags flags, Function body)
 {
-public:
-    template <typename Function>
-    static void Create(const char *name, Function body)
-    {
-        ImGui::Begin(name);
+    Vox::UI::Begin(name, nullptr, flags);
 
-        body();
+    body();
 
-        ImGui::End();
-    }
-};
+    Vox::UI::End();
+}
+
+template <typename Function>
+inline void Window(const char *name, Function body)
+{
+    return Vox::UI::Window(name, 0, body);
+}
 } // namespace Vox::UI
