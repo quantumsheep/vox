@@ -7,6 +7,13 @@ namespace Vox
 typedef GLFWwindow Window;
 typedef GLFWmonitor Monitor;
 
+enum class CursorMode
+{
+    Normal = GLFW_CURSOR_NORMAL,
+    Hidden = GLFW_CURSOR_HIDDEN,
+    Disabled = GLFW_CURSOR_DISABLED,
+};
+
 enum class KeyboardKey
 {
     Unknown = GLFW_KEY_UNKNOWN,
