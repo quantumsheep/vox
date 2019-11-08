@@ -14,7 +14,20 @@ Vox::Texture::Texture(const char *path, Type type_, unsigned int filter_minify_,
 
     if (unsigned char *data = stbi_load(path, &this->width, &this->height, &this->channels_count, 0))
     {
-        unsigned int format = (this->channels_count == 4) ? GL_RGBA : GL_RGB;
+        unsigned int format = GL_RGB;
+
+        switch (this->channels_count)
+        {
+        case 1:
+            format = GL_RED;
+            break;
+        case 2:
+            format = GL_RG;
+            break;
+        case 4:
+            format = GL_RGBA;
+            break;
+        }
 
         glTexImage2D(GL_TEXTURE_2D, 0, format, this->width, this->height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
