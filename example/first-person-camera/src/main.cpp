@@ -1,18 +1,19 @@
 #include <vox/vox.hpp>
 
+#include "fpscamera.hpp"
+
 int main()
 {
     std::unique_ptr<Vox::Environment> env = Vox::Init(1280, 720, "First Person Camera", true);
     if (env == nullptr)
         return 1;
 
+    FPSCamera camera((float)env->width, (float)env->height, glm::vec3(0.0f, 0.0f, -10.0f));
+
     Vox::Shader standard("shaders/standard.vertex.glsl", "shaders/standard.fragment.glsl");
 
     while (env->next_frame())
     {
-        glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
         Vox::UI::NewFrame();
 
         Vox::UI::Window("Debug", [&] {
@@ -102,8 +103,6 @@ int main()
             Vox::UI::DragFloat("scl z", &cube.scale.z, 0.1f);
         });
 
-        static Vox::Camera camera((float)env->width, (float)env->height, glm::vec3(0.0f, 0.0f, -10.0f));
-
         Vox::UI::Window("Camera Control", [&] {
             Vox::UI::Text("Position");
             Vox::UI::DragFloat("pos x", &camera.position.x, 0.01f);
@@ -120,18 +119,15 @@ int main()
             Vox::UI::Separator();
 
             Vox::UI::Text("Properties");
+            Vox::UI::ColorEdit4("background", Vox::Color::to_floats(&camera.background));
             Vox::UI::DragFloat("fov", &camera.fov, 0.1f);
             Vox::UI::DragFloat("near", &camera.near, 0.1f);
             Vox::UI::DragFloat("far", &camera.far, 0.1f);
-
-            Vox::UI::Separator();
-            Vox::UI::Text("Front");
-            Vox::UI::Text("%s", std::to_string(cos(glm::radians(camera.rotation.y)) * cos(glm::radians(camera.rotation.x))).c_str());
-            Vox::UI::Text("%s", std::to_string(sin(glm::radians(camera.rotation.y))).c_str());
-            Vox::UI::Text("%s", std::to_string(cos(glm::radians(camera.rotation.y)) * sin(glm::radians(camera.rotation.x))).c_str());
         });
 
         Vox::UI::Render();
+
+        camera.draw();
 
         standard.use();
         standard.set_vec3("color", glm::vec3(1.0f, 0.0f, 0.0f));
@@ -143,7 +139,11 @@ int main()
 
         Vox::UI::Draw();
 
+        camera.update(env);
+
         env->update_viewport();
+        camera.aspect = (float)env->width / (float)env->height;
+
         env->swap_buffers();
     }
 
