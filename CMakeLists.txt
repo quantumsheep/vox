@@ -24,7 +24,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     ${DEPENDENCIES_HEADERS_FILES}
 )
 
-target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} glad glfw)
+target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} glad glfw assimp)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     VERSION ${PROJECT_VERSION}

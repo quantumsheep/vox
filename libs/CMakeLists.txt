@@ -2,6 +2,10 @@ add_subdirectory(glfw)
 add_subdirectory(glad)
 add_subdirectory(glm)
 
+set(ASSIMP_BUILD_NO_EXPORT ON CACHE BOOL "" FORCE)
+set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+add_subdirectory(assimp)
+
 set(DEPENDENCIES_HEADERS_FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/imgui"
     "${CMAKE_CURRENT_SOURCE_DIR}/imgui-impl"
