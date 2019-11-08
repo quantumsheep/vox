@@ -21,3 +21,9 @@ glm::mat4 Vox::Camera::projection() const
 {
     return glm::perspective(glm::radians(this->fov), this->aspect, this->near, this->far);
 }
+
+void Vox::Camera::draw()
+{
+    glClearColor(this->background.r, this->background.g, this->background.b, this->background.a);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vox/color.hpp>
 #include <vox/gl.hpp>
 
 namespace Vox
@@ -15,6 +16,8 @@ public:
     float fov;
     float near;
     float far;
+
+    Vox::Color background{0.45f, 0.55f, 0.60f, 1.00f};
 
     Camera(float width,
            float height,
@@ -32,5 +35,7 @@ public:
 
     glm::mat4 view() const;
     glm::mat4 projection() const;
+
+    virtual void draw();
 };
 } // namespace Vox
