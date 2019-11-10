@@ -12,15 +12,19 @@ glm::mat4 Vox::Object::model_matrix()
     return model;
 }
 
-Vox::Object::Object(Vox::Model model_, glm::vec3 position_, glm::vec3 rotation_, glm::vec3 scale_)
+Vox::Object::Object(Vox::Model model_, glm::vec3 position_, glm::vec3 rotation_, glm::vec3 scale_, bool visible_)
     : model(model_),
       position(position_),
       rotation(rotation_),
-      scale(scale_)
+      scale(scale_),
+      visible(visible_)
 {
 }
 
 void Vox::Object::draw()
 {
-    this->model.draw();
+    if (this->visible)
+    {
+        this->model.draw();
+    }
 }
