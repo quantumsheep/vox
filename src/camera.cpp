@@ -2,8 +2,8 @@
 
 glm::mat4 Vox::Camera::view() const
 {
-    glm::quat pitch = glm::angleAxis(glm::radians(this->rotation.y), glm::vec3(1.0f, 0.0f, 0.0f));
-    glm::quat yaw = glm::angleAxis(glm::radians(this->rotation.x + 180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    glm::quat pitch = glm::angleAxis(glm::radians(this->rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+    glm::quat yaw = glm::angleAxis(glm::radians(this->rotation.y + 180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     glm::quat roll = glm::angleAxis(glm::radians(this->rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 
     glm::quat orientation = pitch * yaw * roll;
